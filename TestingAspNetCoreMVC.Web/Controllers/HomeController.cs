@@ -30,7 +30,7 @@ namespace TestingAspNetCoreMVC.Web.Controllers
             var user = _userRepository.GetUserById(id);
             if (user == null)
             {
-                return NotFound();
+                return View("NotFound");
             }
             return View(user);
         }
@@ -41,7 +41,7 @@ namespace TestingAspNetCoreMVC.Web.Controllers
             var user = _userRepository.GetUserByRole(role);
             if (user == null)
             {
-                return NotFound();
+                return View("NotFound");
             }
             return View(user);
         }

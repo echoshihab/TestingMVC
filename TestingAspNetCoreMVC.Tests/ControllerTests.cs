@@ -39,5 +39,35 @@ namespace TestingAspNetCoreMVC.Tests
             Assert.Equal(2, model.Count());
 
         }
+
+        [Fact]
+        public void CanRetrieveUserByValidID()
+        {
+            var repository = new Mock<IUserRepository>();
+            repository.Setup(x => x.GetUserById(It.IsInRange<int>(1, 2, Moq.Range.Inclusive))).Returns(new User
+            {
+                ID = 1,
+                Name = "Shihab",
+                Role = "Coordinator"
+            });
+            var controller = new HomeController(repository.Object);
+            var result = Assert.IsType<ViewResult>(controller.Details(1));
+            var model = Assert.IsType<User>(result.Model);
+            Assert.Equal("Shihab", model.Name);
+        }
+
+        [Fact]
+        public void InvalidIdReturnsNotFound()
+        {
+            var repository = new Mock<IUserRepository>();
+            repository.Setup(x => x.GetUserById(It.Is<int>(id => id > 2))).Returns((User)null);
+            var controller = new HomeController(repository.Object);
+            var result = Assert.IsType<ViewResult>(controller.Details(4));
+            Assert.Null(result.Model);
+        }
+
+
+
+
     }
 }
