@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TestingAspNetCoreMVC.Web.Data.Repository;
+using TestingAspNetCoreMVC.Web.Data.Repository.IRepository;
 
 namespace TestingAspNetCoreMVC.Web
 {
@@ -17,6 +19,7 @@ namespace TestingAspNetCoreMVC.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<IUserRepository, InMemoryUserRepository>();
 
         }
 

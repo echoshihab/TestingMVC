@@ -3,8 +3,11 @@ using TestingAspNetCoreMVC.Web.Models;
 
 namespace TestingAspNetCoreMVC.Web.Data.Repository.IRepository
 {
-    public interface IUSerRepository
+    public interface IUserRepository
     {
         List<User> ListUsers();
+
+        User GetUserById(int id);
+        User GetUserByRole(string role);
     }
 }

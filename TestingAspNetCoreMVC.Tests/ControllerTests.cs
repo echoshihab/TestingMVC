@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TestingAspNetCoreMVC.Web.Controllers;
+using TestingAspNetCoreMVC.Web.Data.Repository;
 using TestingAspNetCoreMVC.Web.Models;
 using Xunit;
 
@@ -14,7 +15,8 @@ namespace TestingAspNetCoreMVC.Tests
         public void IndexViewTypeEqualsViewResult()
         {
             //Arrange
-            var controller = new HomeController();
+            var repository = new InMemoryUserRepository();
+            var controller = new HomeController(repository);
             //Act
             var result = controller.Index();
 
@@ -25,7 +27,8 @@ namespace TestingAspNetCoreMVC.Tests
         [Fact]
         public void VerifyCountOfUsers()
         {
-            var controller = new HomeController();
+            var repository = new InMemoryUserRepository();
+            var controller = new HomeController(repository);
             var result = Assert.IsType<ViewResult>(controller.List());
             var model = Assert.IsType<List<User>>(result.Model);
             Assert.Equal(2, model.Count());
