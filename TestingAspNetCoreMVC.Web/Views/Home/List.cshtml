@@ -1,0 +1,19 @@
+@model IEnumerable<TestingAspNetCoreMVC.Web.Models.User>
+
+<ul>
+    @foreach (var user in @Model)
+    {
+        <li>
+            @user.ID
+        </li>
+              <li>
+            @user.Name
+        </li>
+        
+              <li>
+            @user.Role
+        </li>
+        
+        
+    }
+</ul>
