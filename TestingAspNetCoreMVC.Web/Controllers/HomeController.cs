@@ -24,5 +24,26 @@ namespace TestingAspNetCoreMVC.Web.Controllers
 
             return View(users);
         }
+
+        public IActionResult Details(int id)
+        {
+            var user = _userRepository.GetUserById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        [Route("home/role/{role}")]
+        public IActionResult Role(string role)
+        {
+            var user = _userRepository.GetUserByRole(role);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
     }
 }
